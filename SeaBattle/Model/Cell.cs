@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    public abstract class BaseField
+    public class Cell
     {
-        FieldCell[,] Cells;
+        public bool IsEmpty { get;}
+        public bool IsHitted { get; set; }
     }
 
-
-    enum FieldCell : byte
+    enum CellStatus : byte
     {
         Empty = 0,
         Full = 1,

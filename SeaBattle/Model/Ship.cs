@@ -9,7 +9,7 @@ namespace SeaBattle.Model
     /// <summary>
     /// Provides the instance of main unit
     /// </summary>
-    public abstract class BaseShip
+    public abstract class Ship
     {
         public int HorizontalStartCell { get; }
         public int VerticalStartCell { get; }
@@ -17,7 +17,7 @@ namespace SeaBattle.Model
         public int ShipLength { get; }
         public bool[] ShipCells { get; set; }
 
-        public BaseShip(int horizontalStartCell, int verticalStartCell, Direction shipDirection, int shipLength)
+        public Ship(int horizontalStartCell, int verticalStartCell, Direction shipDirection, int shipLength)
         {
             this.HorizontalStartCell = horizontalStartCell;
             this.VerticalStartCell = verticalStartCell;
