@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Field.cs" />
+    <Compile Include="Model\IPlayer.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="StartUp.cs" />

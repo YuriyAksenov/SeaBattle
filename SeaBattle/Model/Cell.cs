@@ -8,8 +8,8 @@ namespace SeaBattle.Model
 {
     public class Cell
     {
-        public bool IsEmpty { get;}
-        public bool IsHitted { get; set; }
+        public bool IsEmpty { get; set;  } = true;
+        public bool IsHitted { get; set; } = false;
     }
 
     enum CellStatus : byte

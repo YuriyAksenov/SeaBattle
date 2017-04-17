@@ -9,20 +9,42 @@ namespace SeaBattle.Model
     /// <summary>
     /// Provides the instance of main unit
     /// </summary>
-    public abstract class Ship
+    public class Ship
     {
-        public int HorizontalStartCell { get; }
-        public int VerticalStartCell { get; }
-        public Direction ShipDirection { get; }
-        public int ShipLength { get; }
-        public bool[] ShipCells { get; set; }
+        public int HorizontalStartCell { get; private set; }
+        public int VerticalStartCell { get; private set; }
+        public Direction Direction { get; }
+        public int Length { get; }
+        public bool IsDefeted { get; private set; }
+        public bool[] Cells
+        {
+            get { return Cells; }
+            set
+            {
+                if (this.Cells.Count(x => x) == Cells.Length) { this.IsDefeted = true; } else { this.IsDefeted = false; }
+            }
+        }
 
-        public Ship(int horizontalStartCell, int verticalStartCell, Direction shipDirection, int shipLength)
+        public Ship( Direction shipDirection, int shipLength)
+        {
+            //this.HorizontalStartCell = horizontalStartCell;
+            //this.VerticalStartCell = verticalStartCell;
+            this.Direction = shipDirection;
+            this.Length = shipLength;
+        }
+
+        public void SetHorizontalVerticalStartCell(int horizontalStartCell, int verticalStartCell)
         {
             this.HorizontalStartCell = horizontalStartCell;
             this.VerticalStartCell = verticalStartCell;
-            this.ShipDirection = shipDirection;
-            this.ShipLength = shipLength;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Length: "+Length.ToString() + '\n');
+            sb.Append("Direction: " + Direction.ToString() + '\n');
+            return sb.ToString();
         }
     }
 

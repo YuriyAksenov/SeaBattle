@@ -8,11 +8,11 @@ namespace SeaBattle.Model
 {
     public abstract class Enemy
     {
-        public bool SetShip(BaseField field, Ship ship)
-        {
-            int neededEmptyCells = ship.ShipLength + (ship.ShipLength * 2) + 2 + (2 * 2);
+        //public bool SetShip(BaseField field, Ship ship)
+        //{
+        //    int neededEmptyCells = ship.ShipLength + (ship.ShipLength * 2) + 2 + (2 * 2);
 
 
-        }
+        //}
     }
 }
