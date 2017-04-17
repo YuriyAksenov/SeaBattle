@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class Player : IPlayer
+    class Player 
     {
 
-        public Field OwnField;
+        public BaseField OwnField;
         //Field EnemyField;
         public Ship ship { get; set; }
         public Player()
         {
             
-            OwnField = new Field();
+            OwnField = new BaseField();
             Console.WriteLine("Helo");
         }
 
-        public void SetShip(Ship ship, int settedHorizontalStartCell, int settedVerticalStartCell)
+        /// <summary>
+        /// Set values to the horizontal and vertical start ship cells. Returns a value indicating whether setting the ship in field is successful.
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <param name="settedHorizontalStartCell"></param>
+        /// <param name="settedVerticalStartCell"></param>
+        /// <returns>bool</returns>
+        public bool SetShip(Ship ship, int settedHorizontalStartCell, int settedVerticalStartCell)
         {
             if (OwnField.IsPossibleToSetShip(ship, settedHorizontalStartCell, settedVerticalStartCell))
             {
@@ -38,13 +45,15 @@ namespace SeaBattle.Model
                     }
                 }
                 ship.SetHorizontalVerticalStartCell(settedHorizontalStartCell, settedVerticalStartCell);
+                return true;
             }
-
+            return false;
             
         }
 
         public bool ShootCell(int shootedHorizontalCell, int shootedVerticalCell)
         {
+            
             throw new NotImplementedException();
         }
     }

@@ -8,6 +8,8 @@ namespace SeaBattle.Model
 {
     public class Cell
     {
+        public Cell() { }
+ 
         public bool IsEmpty { get; set;  } = true;
         public bool IsHitted { get; set; } = false;
     }

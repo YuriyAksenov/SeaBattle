@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    public abstract class Enemy
+    public abstract class EnemyField : BaseField
     {
         //public bool SetShip(BaseField field, Ship ship)
         //{
