@@ -1,6 +1,7 @@
 ﻿namespace SeaBattle.Model
 {
-    internal interface IHomeField
+    public interface IHomeField :IBaseField
     {
+       bool IsPossibleToSetShip(Ship ship, int horizontalSettedCell, int verticalSettedCell);
     }
 }

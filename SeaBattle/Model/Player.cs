@@ -8,15 +8,18 @@ namespace SeaBattle.Model
 {
     class Player 
     {
-
-        public BaseField OwnField;
-        //Field EnemyField;
+        public IHomeField HomeField { get; }
+        public IEnemyField EnemyField { get; private set; }
         public Ship ship { get; set; }
+
         public Player()
         {
-            
-            OwnField = new BaseField();
-            Console.WriteLine("Helo");
+            HomeField = new HomeField();
+        }
+
+        public void SetEnemyField(IEnemyField enemyField)
+        {
+            this.EnemyField = enemyField;
         }
 
         /// <summary>
@@ -28,33 +31,46 @@ namespace SeaBattle.Model
         /// <returns>bool</returns>
         public bool SetShip(Ship ship, int settedHorizontalStartCell, int settedVerticalStartCell)
         {
-            if (OwnField.IsPossibleToSetShip(ship, settedHorizontalStartCell, settedVerticalStartCell))
+            if (HomeField.IsPossibleToSetShip(ship, settedHorizontalStartCell, settedVerticalStartCell))
             {
                 if(ship.Direction == Direction.Horizontal)
                 {
                     for (int i = 0; i < ship.Length; i++)
                     {
-                        OwnField.Cells[settedHorizontalStartCell + i, settedVerticalStartCell].IsEmpty = false;
+                        HomeField.Cells[settedHorizontalStartCell + i, settedVerticalStartCell].IsEmpty = false;
                     }
                 }
                 if (ship.Direction == Direction.Vertical)
                 {
                     for (int i = 0; i < ship.Length; i++)
                     {
-                        OwnField.Cells[settedHorizontalStartCell, settedVerticalStartCell+i].IsEmpty = false;
+                        HomeField.Cells[settedHorizontalStartCell, settedVerticalStartCell+i].IsEmpty = false;
                     }
                 }
-                ship.SetHorizontalVerticalStartCell(settedHorizontalStartCell, settedVerticalStartCell);
+                ship.SetCoordinatesStartCell(settedHorizontalStartCell, settedVerticalStartCell);
                 return true;
             }
             return false;
-            
         }
 
+        /// <summary>
+        /// Shoot the cell. Returns a value indicating whether setting the ship in field is successful.
+        /// </summary>
+        /// <param name="shootedHorizontalCell"></param>
+        /// <param name="shootedVerticalCell"></param>
+        /// <returns>bool</returns>
         public bool ShootCell(int shootedHorizontalCell, int shootedVerticalCell)
         {
-            
-            throw new NotImplementedException();
+            if(EnemyField == null)
+            {
+                throw new Exception("Enemy is not setted");
+            }
+            if (!EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsEmpty && !EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsHitted)
+            {
+                EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsHitted = true;
+                return true;
+            }
+            return false;
         }
     }
 }

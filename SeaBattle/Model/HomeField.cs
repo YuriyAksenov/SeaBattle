@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class HomeField :BaseField, IHomeField
+    class HomeField : BaseField, IHomeField
     {
-        public HomeField(): base()
-        {
-
-        }
-
-        
-
+        public HomeField() : base() { }
 
         /// <summary>
         /// Gets a value indicating whether setting the ship in cell is possible.
@@ -63,7 +57,5 @@ namespace SeaBattle.Model
             if (requiredNumberOfEmptyCells == countedNumberOfEmptyCellsInCheckedCells) return true; else return false;
 
         }
-
-
     }
 }

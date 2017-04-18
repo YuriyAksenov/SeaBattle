@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    public abstract class BaseField
+    public abstract class BaseField : IBaseField
     {
+        public Cell[,] Cells { get; set; }
+
         public BaseField()
         {
             Cells = new Cell[10, 10];
@@ -21,8 +23,6 @@ namespace SeaBattle.Model
                 }
             }
         }
-
-        public Cell[,] Cells { get; set; }
 
         public override string ToString()
         {

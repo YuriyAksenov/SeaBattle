@@ -46,6 +46,8 @@
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\BaseField.cs" />
     <Compile Include="Model\HomeField.cs" />
+    <Compile Include="Model\IBaseField.cs" />
+    <Compile Include="Model\IEnemyField.cs" />
     <Compile Include="Model\IHomeField.cs" />
     <Compile Include="Model\IPlayer.cs" />
     <Compile Include="Model\Player.cs" />

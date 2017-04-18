@@ -11,8 +11,8 @@ namespace SeaBattle.Model
     /// </summary>
     public class Ship
     {
-        public int HorizontalStartCell { get; private set; }
-        public int VerticalStartCell { get; private set; }
+        public int HorizontalCoordinateStartCell { get; private set; }
+        public int VerticalCoordinateStartCell { get; private set; }
         public Direction Direction { get; }
         public int Length { get; }
         public bool IsDefeted { get; private set; }
@@ -33,10 +33,10 @@ namespace SeaBattle.Model
             this.Length = shipLength;
         }
 
-        public void SetHorizontalVerticalStartCell(int horizontalStartCell, int verticalStartCell)
+        public void SetCoordinatesStartCell(int horizontalCoordinateStartCell, int verticalCoordinateStartCell)
         {
-            this.HorizontalStartCell = horizontalStartCell;
-            this.VerticalStartCell = verticalStartCell;
+            this.HorizontalCoordinateStartCell = horizontalCoordinateStartCell;
+            this.VerticalCoordinateStartCell = verticalCoordinateStartCell;
         }
 
         public override string ToString()
@@ -53,5 +53,4 @@ namespace SeaBattle.Model
         Horizontal = 0,
         Vertical = 1
     }
-
 }
