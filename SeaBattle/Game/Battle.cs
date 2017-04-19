@@ -9,14 +9,15 @@ namespace SeaBattle.Game
 {
     class Battle
     {
-        Player playerOneHuman;
-        Player playerTwoAI;
+        BasePlayer playerOneHuman;
+        BasePlayer playerTwoAI;
 
 
         public void Run()
         {
-            playerOneHuman = new Player();
-            playerTwoAI = new Player();
+            
+            playerOneHuman = new BasePlayer();
+            playerTwoAI = new BasePlayer();
 
             playerOneHuman.SetEnemyField(((BaseField)playerTwoAI.HomeField));
             playerTwoAI.SetEnemyField(((BaseField)playerOneHuman.HomeField));
@@ -26,21 +27,10 @@ namespace SeaBattle.Game
 
         }
 
-        public void SetAllShips()
-        {
-            int settedShips = 0;
-            Console.WriteLine("Процесс заполнения кораблями поля");
-            Console.WriteLine(playerOneHuman.HomeField.PrintField());
-            while (settedShips != 10)
-            {
-                Console.WriteLine("Четырех палубный");
-                Console.WriteLine("Введите направление: 1 - по горизонтали; ");
+       
 
-                settedShips++;
 
-            }
-        }
 
-        
+
     }
 }

@@ -13,8 +13,9 @@ namespace SeaBattle.Model
     {
         public int HorizontalCoordinateStartCell { get; private set; }
         public int VerticalCoordinateStartCell { get; private set; }
-        public Direction Direction { get; }
-        public int Length { get; }
+        public Direction Direction { get; private set; }
+        public int Length { get; private set; }
+        public SihpType ShipType { get; }
         public bool IsDefeted { get; private set; }
         public bool[] Cells
         {
@@ -25,12 +26,43 @@ namespace SeaBattle.Model
             }
         }
 
-        public Ship( Direction shipDirection, int shipLength)
+        public Ship() : this(Direction.Horizontal, 0)
         {
-            //this.HorizontalStartCell = horizontalStartCell;
-            //this.VerticalStartCell = verticalStartCell;
+        }
+
+        public Ship(Direction shipDirection, int shipLength)
+        {
+     
             this.Direction = shipDirection;
+            switch (shipLength)
+            {
+                case 4:
+                    this.ShipType = SihpType.Four;
+                    break;
+                case 3:
+                    this.ShipType = SihpType.Three;
+                    break;
+                case 2:
+                    this.ShipType = SihpType.Two;
+                    break;
+                case 1:
+                    this.ShipType = SihpType.One;
+                    break;
+                default:
+                    this.ShipType = SihpType.Empty;
+                    break;
+            }
             this.Length = shipLength;
+        }
+
+        public void SetDirection(Direction direction)
+        {
+            this.Direction = direction;   
+        }
+
+        public void SetLength(int length)
+        {
+            this.Length = length;
         }
 
         public void SetCoordinatesStartCell(int horizontalCoordinateStartCell, int verticalCoordinateStartCell)
@@ -42,7 +74,7 @@ namespace SeaBattle.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Length: "+Length.ToString() + '\n');
+            sb.Append("Length: " + Length.ToString() + '\n');
             sb.Append("Direction: " + Direction.ToString() + '\n');
             return sb.ToString();
         }

@@ -20,8 +20,9 @@ namespace SeaBattle
             //SeaBattle.App app = new SeaBattle.App();
             //app.InitializeComponent();
             //app.Run();
-            Battle game = new Battle();
-            game.Run();
+            Battle battle = new Battle();
+            battle.Run();
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace SeaBattle.Model
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
                     Cells[i, j] = new Cell();
-                    Cells[i, j].IsEmpty = true;
+                    Cells[i, j].CellType = SihpType.Empty;
                     Cells[i, j].IsHitted = false;
                 }
             }

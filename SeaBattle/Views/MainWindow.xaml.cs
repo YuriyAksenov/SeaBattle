@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace SeaBattle
         public MainWindow()
         {
             InitializeComponent();
+
+            Grid homeField = new Grid();
+            
+
+            DataContext = new MainWindowViewModel();
         }
     }
 }

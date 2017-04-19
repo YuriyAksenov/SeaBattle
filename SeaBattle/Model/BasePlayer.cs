@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class Player 
+    public class BasePlayer 
     {
         public IHomeField HomeField { get; }
         public IEnemyField EnemyField { get; private set; }
         public List<Ship> ships { get; set; } 
 
-        public Player()
+        public BasePlayer()
         {
             HomeField = new HomeField();
             ships = new List<Ship>();
@@ -21,14 +21,11 @@ namespace SeaBattle.Model
         public void SetEnemyField(BaseField enemyField)
         {
             this.EnemyField = enemyField as EnemyField;
-            if(EnemyField == null )
+            if (EnemyField != null)
             {
-                Console.WriteLine("Преобразование успешно");
+                throw new Exception("Неправльное приведение типов");
             }
-            else
-            {
-                Console.WriteLine("Перобразоване неуспешно");
-            }
+               
         }
 
         /// <summary>
@@ -46,14 +43,14 @@ namespace SeaBattle.Model
                 {
                     for (int i = 0; i < ship.Length; i++)
                     {
-                        HomeField.Cells[settedHorizontalStartCell + i, settedVerticalStartCell].IsEmpty = false;
+                        HomeField.Cells[settedHorizontalStartCell + i, settedVerticalStartCell].CellType = ship.ShipType;
                     }
                 }
                 if (ship.Direction == Direction.Vertical)
                 {
                     for (int i = 0; i < ship.Length; i++)
                     {
-                        HomeField.Cells[settedHorizontalStartCell, settedVerticalStartCell+i].IsEmpty = false;
+                        HomeField.Cells[settedHorizontalStartCell, settedVerticalStartCell+i].CellType = ship.ShipType;
                     }
                 }
                 ship.SetCoordinatesStartCell(settedHorizontalStartCell, settedVerticalStartCell);
