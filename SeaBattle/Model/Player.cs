@@ -10,7 +10,6 @@ namespace SeaBattle.Model
     {
         public IHomeField HomeField { get; }
         public IEnemyField EnemyField { get; private set; }
-        public Ship ship { get; set; }
 
         public Player()
         {
