@@ -22,7 +22,7 @@ namespace SeaBattle.Game
             playerOneHuman.SetEnemyField(((BaseField)playerTwoAI.HomeField));
             playerTwoAI.SetEnemyField(((BaseField)playerOneHuman.HomeField));
 
-            SetAllShips();
+ 
             
 
         }

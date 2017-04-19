@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SeaBattle.Game
 {
     class HumanPlayer : BasePlayer
@@ -65,9 +66,7 @@ namespace SeaBattle.Game
              return true;
             } catch (Exception e)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("При установке корабля произошла ошибка, придется повторить попытку", e.Message);
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                UserNotification.ErrorMessage("При установке корабля произошла ошибка, придется повторить попытку", e);
             }
             return false;
 
