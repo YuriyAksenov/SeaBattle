@@ -24,6 +24,8 @@ namespace SeaBattle.Model
             }
         }
 
+        public abstract string PrintField();
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

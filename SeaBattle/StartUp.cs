@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SeaBattle.Game;
 
 namespace SeaBattle
 {
@@ -11,14 +12,16 @@ namespace SeaBattle
         /// <summary>
         /// Application Entry Point.
         /// </summary>
-        [System.STAThreadAttribute()]
-        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        //[System.STAThreadAttribute()]
+        //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //[System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main()
         {
-            SeaBattle.App app = new SeaBattle.App();
-            app.InitializeComponent();
-            app.Run();
+            //SeaBattle.App app = new SeaBattle.App();
+            //app.InitializeComponent();
+            //app.Run();
+            Battle game = new Battle();
+            game.Run();
         }
     }
 }

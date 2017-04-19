@@ -10,15 +10,25 @@ namespace SeaBattle.Model
     {
         public IHomeField HomeField { get; }
         public IEnemyField EnemyField { get; private set; }
+        public List<Ship> ships { get; set; } 
 
         public Player()
         {
             HomeField = new HomeField();
+            ships = new List<Ship>();
         }
 
-        public void SetEnemyField(IEnemyField enemyField)
+        public void SetEnemyField(BaseField enemyField)
         {
-            this.EnemyField = enemyField;
+            this.EnemyField = enemyField as EnemyField;
+            if(EnemyField == null )
+            {
+                Console.WriteLine("Преобразование успешно");
+            }
+            else
+            {
+                Console.WriteLine("Перобразоване неуспешно");
+            }
         }
 
         /// <summary>
