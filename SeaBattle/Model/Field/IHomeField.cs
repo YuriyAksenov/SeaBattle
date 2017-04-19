@@ -1,7 +1,10 @@
-﻿namespace SeaBattle.Model
+﻿using SeaBattle.Model.Ship;
+
+namespace SeaBattle.Model.Field
 {
     public interface IHomeField :IBaseField
     {
-       bool IsPossibleToSetShip(Ship ship, int horizontalSettedCell, int verticalSettedCell);
+       bool IsPossibleToSetShip(BaseShip baseShip);
+       bool SetShip(BaseShip ship);
     }
 }

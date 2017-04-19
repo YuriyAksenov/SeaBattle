@@ -1,72 +1,124 @@
 ﻿using SeaBattle.Model;
+using SeaBattle.Model.Field;
+using SeaBattle.Model.Ship;
+using SeaBattle.Share;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UI = SeaBattle.Share.UserInteraction;
 
 
-namespace SeaBattle.Game
+namespace SeaBattle.Model.Player
 {
     class HumanPlayer : BasePlayer
     {
-        public HumanPlayer():base()
+        public HumanPlayer() : base()
         {
             SetAllShips();
-            
+
         }
 
 
         public void SetAllShips()
         {
             int settedShips = 0;
-            Console.WriteLine("Процесс заполнения кораблями поля");
+            UI.Message("Процесс заполнения кораблями поля");
             PrintHomeField(HomeField);
 
-            Ship shipFour = new Ship();
-            Console.WriteLine("Установка четырех палубного");
-            Console.WriteLine("Введите направление: 1 - по горизонтали; 2 - по вертикали");
+            BaseShip shipFour = new BaseShip();
+            UI.Message("Установка четырех палубного");
+            UI.Message("Введите направление: 1 - по горизонтали; 2 - по вертикали");
             try
             {
-                shipFour.SetLength(Console.Read());
+                shipFour.SetLength(UI.Read());
             }
             catch (Exception e)
             {
-
-                Console.WriteLine("Ввод был неправелен.", e.Message);
+                UI.ErrorMessage("Ввод был неправелен.", e);
             }
 
-            Console.WriteLine("Введите координату начальной клетке: сначала букву, через пробел цифру");
+            UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру");
 
 
 
-            Console.WriteLine("Установка четырех палубного");
-                Console.WriteLine("Введите направление: 1 - по горизонтали; 2 - по вертикали");
-            
-            Console.WriteLine("Введите координату начальной клетке: сначала букву, через пробел цифру");
+            UI.Message("Установка четырех палубного");
+            UI.Message("Введите направление: 1 - по горизонтали; 2 - по вертикали");
 
-            
+            UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру");
+
+
         }
 
-        private bool SetFourShip()
+        private bool SetShip(ShipType shipType)
         {
-            try { 
-            Direction shipDirection = Direction.Horizontal;
-                string startCellLineFromConsole = "";
-
-
-            PrintHomeField(HomeField);
-            Console.WriteLine("Установка четырех палубного");
-            Console.WriteLine("Введите направление: 1 - по горизонтали; 2 - по вертикали");
-
-            shipDirection = (Console.Read() == 1 ? Direction.Horizontal : Direction.Vertical); ; //добавить проверку
-            Console.WriteLine("Введите координату начальной клетке: сначала букву, через пробел цифру");
-            string startCellLine = Console.ReadLine();
-
-             return true;
-            } catch (Exception e)
+            try
             {
-                UserNotification.ErrorMessage("При установке корабля произошла ошибка, придется повторить попытку", e);
+                Direction shipDirection = Direction.Horizontal;
+                string[] startCellLineFromConsole;
+                int horizontalCoordinateStartCell = 0;
+                int verticalCoordinateStartCell = 0;
+
+
+                PrintHomeField(HomeField);
+                switch (shipType)
+                {
+
+                    case ShipType.One:
+                        UI.Message("Установка одно-палубного");
+                        break;
+                    case ShipType.Two:
+                        UI.Message("Установка двух-палубного");
+                        break;
+                    case ShipType.Three:
+                        UI.Message("Установка трех-палубного");
+                        break;
+                    case ShipType.Four:
+                        UI.Message("Установка четырех-палубного");
+                        break;
+                }
+                UI.Message("Установка четырех палубного");
+                UI.Message("Введите направление: 1 - по горизонтали; 2 - по вертикали");
+
+                shipDirection = (UI.Read() == 1 ? Direction.Horizontal : Direction.Vertical); ;
+                UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру");
+                startCellLineFromConsole = UI.ReadLine().Trim().Split(' ');
+                horizontalCoordinateStartCell = Convert.ToInt32(startCellLineFromConsole.First())-1;
+
+                switch (startCellLineFromConsole.Last()[0])
+                {
+                    case 'А': verticalCoordinateStartCell = 0; break;
+                    case 'Б': verticalCoordinateStartCell = 1; break;
+                    case 'В': verticalCoordinateStartCell = 2; break;
+                    case 'Г': verticalCoordinateStartCell = 3; break;
+                    case 'Д': verticalCoordinateStartCell = 4; break;
+                    case 'Е': verticalCoordinateStartCell = 5; break;
+                    case 'Ж': verticalCoordinateStartCell = 6; break;
+                    case 'З': verticalCoordinateStartCell = 7; break;
+                    case 'И': verticalCoordinateStartCell = 8; break;
+                    case 'К': verticalCoordinateStartCell = 9; break;
+                    default:
+                        break;
+                }
+
+                BaseShip shipFour = new BaseShip(shipDirection, 4, horizontalCoordinateStartCell, verticalCoordinateStartCell);
+                if (HomeField.IsPossibleToSetShip(shipFour))
+                {
+                    HomeField.SetShip(shipFour);
+                    UI.OKMessage("Корабль установлен!");
+                    return true;
+                }
+                else
+                {
+                    UI.ImportantMessage("Корабль невозможно установить в эти клетки");
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                UI.ErrorMessage("При установке корабля произошла ошибка, придется повторить попытку", e);
             }
             return false;
 

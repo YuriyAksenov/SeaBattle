@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SeaBattle.Model.Ship;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace SeaBattle.Model.Field
 {
     class HomeField : BaseField, IHomeField
     {
@@ -13,16 +14,21 @@ namespace SeaBattle.Model
         /// <summary>
         /// Gets a value indicating whether setting the ship in cell is possible.
         /// </summary>
-        /// <param name="ship"></param>
+        /// <param name="baseShip"></param>
         /// <param name="horizontalSettedCell"></param>
         /// <param name="verticalSettedCell"></param>
         /// <returns>bool</returns>
-        public bool IsPossibleToSetShip(Ship ship, int horizontalSettedCell, int verticalSettedCell)
+        public bool IsPossibleToSetShip(BaseShip baseShip)
         {
-            if ((ship.Direction == Direction.Horizontal && (ship.Length + horizontalSettedCell) > 10) || (ship.Direction == Direction.Vertical && (ship.Length + verticalSettedCell) > 10)) return false;
+            int horizontalSettedCell = baseShip.HorizontalCoordinateStartCell;
+            int verticalSettedCell = baseShip.VerticalCoordinateStartCell;
 
 
-            int requiredNumberOfEmptyCells = ship.Length + (ship.Length * 2) + 2 + (2 * 2); // The length of the ship and the number of necessary cells around.
+            if ((baseShip.Direction == Direction.Horizontal && (baseShip.Length + horizontalSettedCell) > 10) ||
+                (baseShip.Direction == Direction.Vertical && (baseShip.Length + verticalSettedCell) > 10)) return false;
+
+
+            int requiredNumberOfEmptyCells = baseShip.Length + (baseShip.Length * 2) + 2 + (2 * 2); // The length of the ship and the number of necessary cells around.
             int countedNumberOfEmptyCellsInCheckedCells = 0;
 
             // Checking the conditions occurs through covering required space (ship surround) and accessed space(empty cells).
@@ -43,8 +49,8 @@ namespace SeaBattle.Model
                 }
             }
 
-            int horizontalCheckEmptyCellsLength = (ship.Direction == Direction.Horizontal ? ship.Length : 1) + 2;
-            int verticalCheckEmptyCellsLength = (ship.Direction == Direction.Vertical ? ship.Length : 1) + 2;
+            int horizontalCheckEmptyCellsLength = (baseShip.Direction == Direction.Horizontal ? baseShip.Length : 1) + 2;
+            int verticalCheckEmptyCellsLength = (baseShip.Direction == Direction.Vertical ? baseShip.Length : 1) + 2;
 
 
             for (int i = horizontalSettedCell; i < horizontalSettedCell + horizontalCheckEmptyCellsLength; i++)
@@ -56,6 +62,39 @@ namespace SeaBattle.Model
             }
             if (requiredNumberOfEmptyCells == countedNumberOfEmptyCellsInCheckedCells) return true; else return false;
 
+        }
+
+        /// <summary>
+        /// Set values to the horizontal and vertical start ship cells. Returns a value indicating whether setting the ship in field is successful.
+        /// </summary>
+        /// <param name="baseShip"></param>
+        /// <param name="settedHorizontalStartCell"></param>
+        /// <param name="settedVerticalStartCell"></param>
+        /// <returns>bool</returns>
+        public bool SetShip(BaseShip baseShip)
+        {
+            int settedHorizontalStartCell = baseShip.HorizontalCoordinateStartCell;
+            int settedVerticalStartCell = baseShip.VerticalCoordinateStartCell;
+            if (this.IsPossibleToSetShip(baseShip))
+            {
+                if (baseShip.Direction == Direction.Horizontal)
+                {
+                    for (int i = 0; i < baseShip.Length; i++)
+                    {
+                        this.Cells[settedHorizontalStartCell + i, settedVerticalStartCell].CellType = baseShip.ShipType;
+                    }
+                }
+                if (baseShip.Direction == Direction.Vertical)
+                {
+                    for (int i = 0; i < baseShip.Length; i++)
+                    {
+                        this.Cells[settedHorizontalStartCell, settedVerticalStartCell + i].CellType = baseShip.ShipType;
+                    }
+                }
+                //baseShip.SetCoordinatesStartCell(settedHorizontalStartCell, settedVerticalStartCell);
+                return true;
+            }
+            return false;
         }
 
         public override string PrintField()
@@ -71,7 +110,7 @@ namespace SeaBattle.Model
 
                 for (int j = 0; j < 10; j++)
                 {
-                    
+
                     sb.Append(" " + ((Cells[j, i].IsHitted ? "0" : "1") + " |"));
                 }
                 sb.AppendLine();

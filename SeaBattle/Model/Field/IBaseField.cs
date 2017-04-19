@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.Model
+﻿namespace SeaBattle.Model.Field
 {
     public interface IBaseField
     {

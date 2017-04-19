@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace SeaBattle.Model.Ship
 {
     /// <summary>
     /// Provides the instance of main unit
     /// </summary>
-    public class Ship
+    public class BaseShip
     {
         public int HorizontalCoordinateStartCell { get; private set; }
         public int VerticalCoordinateStartCell { get; private set; }
         public Direction Direction { get; private set; }
         public int Length { get; private set; }
-        public SihpType ShipType { get; }
+        public ShipType ShipType { get; }
         public bool IsDefeted { get; private set; }
         public bool[] Cells
         {
@@ -26,34 +26,41 @@ namespace SeaBattle.Model
             }
         }
 
-        public Ship() : this(Direction.Horizontal, 0)
+        public BaseShip() : this(Direction.Horizontal, 0)
         {
         }
-
-        public Ship(Direction shipDirection, int shipLength)
+        public BaseShip(Direction shipDirection, int shipLength):this(shipDirection,shipLength,0,0)
         {
      
+            
+        }
+        public BaseShip(Direction shipDirection, int shipLength, int horizontalCoordinateStartCell, int verticalCoordinateStartCell)
+        {
+            this.HorizontalCoordinateStartCell = horizontalCoordinateStartCell;
+            this.VerticalCoordinateStartCell = verticalCoordinateStartCell;
+
             this.Direction = shipDirection;
             switch (shipLength)
             {
                 case 4:
-                    this.ShipType = SihpType.Four;
+                    this.ShipType = ShipType.Four;
                     break;
                 case 3:
-                    this.ShipType = SihpType.Three;
+                    this.ShipType = ShipType.Three;
                     break;
                 case 2:
-                    this.ShipType = SihpType.Two;
+                    this.ShipType = ShipType.Two;
                     break;
                 case 1:
-                    this.ShipType = SihpType.One;
+                    this.ShipType = ShipType.One;
                     break;
                 default:
-                    this.ShipType = SihpType.Empty;
+                    this.ShipType = ShipType.Empty;
                     break;
             }
             this.Length = shipLength;
         }
+
 
         public void SetDirection(Direction direction)
         {

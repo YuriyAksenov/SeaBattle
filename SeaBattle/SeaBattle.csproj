@@ -68,15 +68,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Battle.cs" />
     <Compile Include="Model\Player\AIPlayer.cs" />
     <Compile Include="Model\Player\HumanPlayer.cs" />
-    <Compile Include="Share\UserNotification.cs" />
+    <Compile Include="Model\ShipType.cs" />
+    <Compile Include="Share\UserInteraction.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="Game\Battle.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Share\Cell.cs" />
+    <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Field\BaseField.cs" />
     <Compile Include="Model\Field\HomeField.cs" />
     <Compile Include="Model\Field\IBaseField.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Model\Field\IHomeField.cs" />
     <Compile Include="Model\Player\IPlayer.cs" />
     <Compile Include="Model\Player\BasePlayer.cs" />
-    <Compile Include="Model\Ship\Ship.cs" />
+    <Compile Include="Model\Ship\BaseShip.cs" />
     <Compile Include="Model\Field\EnemyField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

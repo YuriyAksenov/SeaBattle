@@ -1,8 +1,10 @@
-﻿namespace SeaBattle.Model
+﻿using SeaBattle.Model.Ship;
+
+namespace SeaBattle.Model.Player
 {
     public interface IPlayer
     {
-        void SetShip(Ship ship, int settedHorizontalStartCell, int settedVerticalStartCell);
+        
         bool ShootCell(int shootedHorizontalCell, int shootedVerticalCell);
     }
 }

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SeaBattle.Model;
+using SeaBattle.Model.Player;
+using SeaBattle.Model.Field;
 
-namespace SeaBattle.Game
+namespace SeaBattle.Share
 {
     class Battle
     {
@@ -15,19 +18,19 @@ namespace SeaBattle.Game
 
         public void Run()
         {
-            
+
             playerOneHuman = new BasePlayer();
             playerTwoAI = new BasePlayer();
 
             playerOneHuman.SetEnemyField(((BaseField)playerTwoAI.HomeField));
             playerTwoAI.SetEnemyField(((BaseField)playerOneHuman.HomeField));
 
- 
-            
+
+
 
         }
 
-       
+
 
 
 

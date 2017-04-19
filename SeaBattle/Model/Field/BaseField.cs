@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace SeaBattle.Model.Field
 {
     public abstract class BaseField : IBaseField
     {
@@ -18,7 +18,7 @@ namespace SeaBattle.Model
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
                     Cells[i, j] = new Cell();
-                    Cells[i, j].CellType = SihpType.Empty;
+                    Cells[i, j].CellType = ShipType.Empty;
                     Cells[i, j].IsHitted = false;
                 }
             }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Game
+namespace SeaBattle.Share
 {
-    public static class UserNotification
+    public static class UserInteraction
     {
         public static void Message(string message, string additionalInformation = "")
         {
@@ -35,6 +35,16 @@ namespace SeaBattle.Game
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message, e.Message, additionalInformation);
             Console.ForegroundColor = ConsoleColor.Cyan;
+        }
+
+        public static int Read()
+        {
+            return Console.Read();
+        }
+
+        public static string ReadLine()
+        {
+            return Console.ReadLine();
         }
 
        

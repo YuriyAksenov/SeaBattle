@@ -14,25 +14,25 @@ namespace SeaBattle.Model
         {
             get
             {
-                return CellType == SihpType.Empty ? true : false;
+                return CellType == ShipType.Empty ? true : false;
             }
         }
         public bool IsHitted { get; set; } = false;
-        public SihpType CellType { get; set; } = SihpType.Empty;
+        public ShipType CellType { get; set; } = ShipType.Empty;
 
         public override string ToString()
         {
             switch (CellType)
             {
-                case SihpType.Empty:
+                case ShipType.Empty:
                     return "0";
-                case SihpType.One:
+                case ShipType.One:
                     return "1";
-                case SihpType.Two:
+                case ShipType.Two:
                     return "2";
-                case SihpType.Three:
+                case ShipType.Three:
                     return "3";
-                case SihpType.Four:
+                case ShipType.Four:
                     return "4";
                 default:
                     return "0";
@@ -40,12 +40,5 @@ namespace SeaBattle.Model
         }
     }
 
-    public enum SihpType : byte
-    {
-        Empty = 0,
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4
-    }
+    
 }

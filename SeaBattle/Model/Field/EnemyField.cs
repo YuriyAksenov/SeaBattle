@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace SeaBattle.Model.Field
 {
     public class EnemyField : BaseField, IEnemyField
     {
