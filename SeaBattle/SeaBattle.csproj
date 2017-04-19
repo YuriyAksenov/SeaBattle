@@ -69,8 +69,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Battle.cs" />
-    <Compile Include="Model\Player\AIPlayer.cs" />
-    <Compile Include="Model\Player\HumanPlayer.cs" />
+    <Compile Include="Game\AIPlayer.cs" />
+    <Compile Include="Game\HumanPlayer.cs" />
     <Compile Include="Model\ShipType.cs" />
     <Compile Include="Share\UserInteraction.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

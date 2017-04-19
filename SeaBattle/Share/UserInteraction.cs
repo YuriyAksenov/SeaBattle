@@ -12,35 +12,32 @@ namespace SeaBattle.Share
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(message, additionalInformation);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
+        
 
         public static void ImportantMessage(string message, string additionalInformation = "")
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(message, additionalInformation);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public static void OKMessage(string message, string additionalInformation = "")
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(message,additionalInformation);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public static void ErrorMessage(string message, Exception e, string additionalInformation = "")
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message, e.Message, additionalInformation);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public static int Read()
-        {
-            return Console.Read();
-        }
+        
 
         public static string ReadLine()
         {

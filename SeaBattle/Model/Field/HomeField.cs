@@ -110,8 +110,8 @@ namespace SeaBattle.Model.Field
 
                 for (int j = 0; j < 10; j++)
                 {
-
-                    sb.Append(" " + ((Cells[j, i].IsHitted ? "0" : "1") + " |"));
+                    
+                    sb.Append(" " + ((Cells[j, i].IsHitted ? "1" : "0") + " |"));
                 }
                 sb.AppendLine();
             }
