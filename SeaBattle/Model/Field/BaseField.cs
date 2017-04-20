@@ -24,6 +24,18 @@ namespace SeaBattle.Model.Field
             }
         }
 
+        public void ClearField()
+        {
+            for (int i = 0; i < Cells.GetLength(1); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    Cells[i, j].CellType = ShipType.Empty;
+                    Cells[i, j].IsHitted = false;
+                }
+            }
+        }
+
         public abstract string PrintField();
 
         public override string ToString()
@@ -40,14 +52,5 @@ namespace SeaBattle.Model.Field
             return sb.ToString();
         }
 
-    }
-
-
-    enum FieldCell : byte
-    {
-        Empty = 0,
-        Full = 1,
-        Hit = 2,
-        Past = 3
     }
 }

@@ -10,14 +10,14 @@ namespace SeaBattle.Model.Player
 {
     public class BasePlayer 
     {
-        public IHomeField HomeField { get; }
+        public IHomeField HomeField { get; private set; }
         public IEnemyField EnemyField { get; private set; }
-        public List<BaseShip> ships { get; set; } 
+        public List<BaseShip> Ships { get; set; } 
 
         public BasePlayer()
         {
             HomeField = new HomeField();
-            ships = new List<BaseShip>();
+            Ships = new List<BaseShip>();
         }
 
         public void SetEnemyField(BaseField enemyField)
@@ -26,11 +26,15 @@ namespace SeaBattle.Model.Player
             if (EnemyField != null)
             {
                 throw new Exception("Неправльное приведение типов");
-            }
-               
+            }     
         }
 
-        
+        public void SetHomeField(BaseField homeField)
+        {
+            this.HomeField = homeField as HomeField;
+        }
+
+
 
         /// <summary>
         /// Shoot the cell. Returns a value indicating whether setting the ship in field is successful.

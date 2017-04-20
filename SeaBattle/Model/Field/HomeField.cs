@@ -97,6 +97,36 @@ namespace SeaBattle.Model.Field
             return false;
         }
 
+        public void SetPatternField(int[,] patternField)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Cells[j,i].IsHitted = false;
+                    switch (patternField[i,j])
+                    {
+                        case 1:
+                            Cells[j, i].CellType = ShipType.One;
+                            break;
+                        case 2:
+                            Cells[j, i].CellType = ShipType.Two;
+                            break;
+                        case 3:
+                            Cells[j, i].CellType = ShipType.Three;
+                            break;
+                        case 4:
+                            Cells[j, i].CellType = ShipType.Four;
+                            break;
+                        default:
+                            Cells[j, i].CellType = ShipType.Empty;
+                            break;
+                    }
+
+                }
+            }
+        }
+
         public override string PrintField()
         {
             StringBuilder sb = new StringBuilder();

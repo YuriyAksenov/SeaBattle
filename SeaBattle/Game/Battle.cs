@@ -8,7 +8,8 @@ using SeaBattle.Model;
 using SeaBattle.Model.Player;
 using SeaBattle.Model.Field;
 using SeaBattle.Model.Ship;
-
+using SeaBattle.Game;
+using SeaBattle.Model.Game;
 
 namespace SeaBattle.Share
 {
@@ -20,20 +21,28 @@ namespace SeaBattle.Share
         public void Run()
         {
 
-            playerOneHuman = new HumanPlayer();
-            //playerTwoAI = new AIPlayer();
+            //playerOneHuman = new HumanPlayer();
+
 
             //playerOneHuman.SetEnemyField(((BaseField)playerTwoAI.HomeField));
             //playerTwoAI.SetEnemyField(((BaseField)playerOneHuman.HomeField));
-            PrintHomeField(playerOneHuman.HomeField);
-            playerOneHuman.SetAllShips();
-            PrintHomeField(playerOneHuman.HomeField);
+            //PrintHomeField(playerOneHuman.HomeField);
+            //playerOneHuman.SetAllShips();
+            //PrintHomeField(playerOneHuman.HomeField);
+            for (int i = 0; i < 100; i++)
+            {
+                playerTwoAI = new AIPlayer();
+                playerTwoAI.SetAllShips();
+                PrintHomeField(playerTwoAI.HomeField);
+                Console.ReadLine();
+            }
+            
 
         }
 
         public void PrintHomeField(IHomeField homeField)
         {
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
 
             for (int i = 0; i < 10; i++)
@@ -61,14 +70,14 @@ namespace SeaBattle.Share
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.Write(homeField.Cells[j, i].ToString());
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Gray;
                         }
                     }
                     Console.Write(" |");
                 }
                 Console.WriteLine();
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public void PrintEnemyField(IEnemyField enemyFiled)

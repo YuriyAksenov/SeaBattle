@@ -1,5 +1,6 @@
 ﻿using SeaBattle.Model;
 using SeaBattle.Model.Field;
+using SeaBattle.Model.Game;
 using SeaBattle.Model.Player;
 using SeaBattle.Model.Ship;
 using SeaBattle.Share;
@@ -8,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 using UI = SeaBattle.Share.UserInteraction;
 
 
@@ -15,11 +18,54 @@ namespace SeaBattle.Game
 {
     class HumanPlayer : BasePlayer
     {
-        public HumanPlayer() : base() {      }
+        public HumanPlayer() : base() { }
 
         public void SetAllShips()
         {
-            SetShip(ShipType.Four);
+            UI.Message("Заполнить поле автоматически? Y - 'Да, автоматически'; N  - 'Нет, вручную'");
+            string auto = "N";
+            auto = UI.ReadLine();
+            if(auto.Trim() == "Y")
+            {
+                AIPlayer aiplayer = new AIPlayer();
+                aiplayer.SetHomeField((BaseField)HomeField);
+                aiplayer.SetAllShips();
+                return;
+            }
+            bool isSettedShipFour = false;
+            while (!isSettedShipFour) { isSettedShipFour=SetShip(ShipType.Four); }
+            PrintHomeField();
+
+            //bool isSettedShipThree = false;
+            //while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
+            //PrintHomeField();
+            //isSettedShipThree = false;
+            //while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
+            //PrintHomeField();
+
+            //bool isSettedShipTwo = false;
+            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            //PrintHomeField();
+            //isSettedShipTwo = false;
+            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            //PrintHomeField();
+            //isSettedShipTwo = false;
+            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            //PrintHomeField();
+
+            //bool isSettedShipOne = false;
+            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            //PrintHomeField();
+            //isSettedShipOne = false;
+            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            //PrintHomeField();
+            //isSettedShipOne = false;
+            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            //PrintHomeField();
+            //isSettedShipOne = false;
+            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            //PrintHomeField();
+
         }
 
         private bool SetShip(ShipType shipType)
@@ -27,7 +73,7 @@ namespace SeaBattle.Game
             try
             {
                 Direction shipDirection = Direction.Horizontal;
-                string[] startCellLineFromConsole;
+                int shipLength = 0;
                 int horizontalCoordinateStartCell = 0;
                 int verticalCoordinateStartCell = 0;
 
@@ -36,15 +82,19 @@ namespace SeaBattle.Game
 
                     case ShipType.One:
                         UI.Message("Установка одно-палубного");
+                        shipLength = 1;
                         break;
                     case ShipType.Two:
                         UI.Message("Установка двух-палубного");
+                        shipLength = 2;
                         break;
                     case ShipType.Three:
                         UI.Message("Установка трех-палубного");
+                        shipLength = 3;
                         break;
                     case ShipType.Four:
                         UI.Message("Установка четырех-палубного");
+                        shipLength = 4;
                         break;
                 }
 
@@ -52,7 +102,7 @@ namespace SeaBattle.Game
                 shipDirection = ((Convert.ToInt32(UI.ReadLine().First().ToString()) == 1) ? Direction.Horizontal : Direction.Vertical);
 
                 UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру");
-                startCellLineFromConsole = UI.ReadLine().Trim().Split(' ');
+                string[] startCellLineFromConsole = UI.ReadLine().Trim().Split(' ');
                 horizontalCoordinateStartCell = (Convert.ToInt32(startCellLineFromConsole.First().ToString()) - 1);
 
                 switch (startCellLineFromConsole.Last()[0])
@@ -71,10 +121,12 @@ namespace SeaBattle.Game
                         break;
                 }
 
-                BaseShip baseShip = new BaseShip(shipDirection, 4, verticalCoordinateStartCell, horizontalCoordinateStartCell);
+                BaseShip baseShip = new BaseShip(shipDirection, shipLength, verticalCoordinateStartCell, horizontalCoordinateStartCell);
                 if (HomeField.IsPossibleToSetShip(baseShip))
                 {
                     HomeField.SetShip(baseShip);
+
+                    Ships.Add(baseShip);
 
                     switch (shipType)
                     {
@@ -106,33 +158,45 @@ namespace SeaBattle.Game
             return false;
         }
 
-        //public void PrintHomeField()
-        //{
-        //    Console.ForegroundColor = ConsoleColor.White;
-        //    Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
+        public void PrintHomeField()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
 
-        //    for (int i = 0; i < 10; i++)
-        //    {
-        //        if ((i + 1) == 10) { Console.Write(" " + (i + 1).ToString() + " |"); }
-        //        else { Console.Write("  " + (i + 1).ToString() + " |"); }
+            for (int i = 0; i < 10; i++)
+            {
+                if ((i + 1) == 10) { Console.Write(" " + (i + 1).ToString() + " |"); }
+                else { Console.Write("  " + (i + 1).ToString() + " |"); }
 
-        //        for (int j = 0; j < 10; j++)
-        //        {
+                for (int j = 0; j < 10; j++)
+                {
 
-        //            Console.Write(" ");
-        //            if (HomeField.Cells[j, i].IsHitted)
-        //            {
-        //                Console.ForegroundColor = ConsoleColor.Red;
-        //                Console.Write(HomeField.Cells[j, i].ToString());
-        //                Console.ForegroundColor = ConsoleColor.White;
-        //            }
-        //            else { Console.Write(HomeField.Cells[j, i].ToString()); }
-        //            Console.Write(" |");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //    Console.ForegroundColor = ConsoleColor.Cyan;
-        //}
+                    Console.Write(" ");
+                    if (HomeField.Cells[j, i].IsHitted)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(HomeField.Cells[j, i].ToString());
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        if (HomeField.Cells[j, i].ToString() == "0")
+                        {
+                            Console.Write(HomeField.Cells[j, i].ToString());
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write(HomeField.Cells[j, i].ToString());
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    Console.Write(" |");
+                }
+                Console.WriteLine();
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+        }
 
     }
 }
