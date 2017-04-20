@@ -8,11 +8,11 @@ using SeaBattle.Model.Ship;
 
 namespace SeaBattle.Model.Player
 {
-    public class BasePlayer 
+    public class BasePlayer
     {
         public IHomeField HomeField { get; private set; }
-        public IEnemyField EnemyField { get; private set; }
-        public List<BaseShip> Ships { get; set; } 
+        public IEnemyField EnemyField { get; set; }
+        public List<BaseShip> Ships { get; set; }
 
         public BasePlayer()
         {
@@ -23,10 +23,10 @@ namespace SeaBattle.Model.Player
         public void SetEnemyField(BaseField enemyField)
         {
             this.EnemyField = enemyField as EnemyField;
-            if (EnemyField != null)
+            if (EnemyField == null)
             {
-                throw new Exception("Неправльное приведение типов");
-            }     
+                throw new Exception("Неправильное приведение типов");
+            }
         }
 
         public void SetHomeField(BaseField homeField)
@@ -34,7 +34,10 @@ namespace SeaBattle.Model.Player
             this.HomeField = homeField as HomeField;
         }
 
-
+        public bool IsAllShipsHitted()
+        {
+            return Ships.Any(x => !x.IsDefeted);
+        }
 
         /// <summary>
         /// Shoot the cell. Returns a value indicating whether setting the ship in field is successful.
@@ -44,16 +47,41 @@ namespace SeaBattle.Model.Player
         /// <returns>bool</returns>
         public bool ShootCell(int shootedHorizontalCell, int shootedVerticalCell)
         {
-            if(EnemyField == null)
+            if (EnemyField == null)
             {
                 throw new Exception("Enemy is not setted");
             }
             if (!EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsEmpty && !EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsHitted)
             {
                 EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].IsHitted = true;
+                MarkDamagedUnitShip(shootedHorizontalCell,shootedVerticalCell);
                 return true;
             }
             return false;
+        }
+
+        private void MarkDamagedUnitShip(int shootedHorizontalCell, int shootedVerticalCell)
+        {
+            for (int i = 0; i < Ships.Count; i++)
+            {
+                if (Ships[i].ShipType == EnemyField.Cells[shootedHorizontalCell, shootedVerticalCell].CellType)
+                {
+                    if (Ships[i].Direction == Direction.Horizontal)
+                    {
+                        if((shootedHorizontalCell >= Ships[i].HorizontalCoordinateStartCell) && (shootedHorizontalCell <= (Ships[i].HorizontalCoordinateStartCell + Ships[i].Length)))
+                        {
+                            Ships[i].CountDefetedUnits++;
+                        }
+                    }
+                    if (Ships[i].Direction == Direction.Horizontal)
+                    {
+                        if ((shootedVerticalCell >= Ships[i].VerticalCoordinateStartCell) && (shootedVerticalCell <= (Ships[i].VerticalCoordinateStartCell + Ships[i].Length)))
+                        {
+                            Ships[i].CountDefetedUnits++;
+                        }
+                    }
+                }
+            }
         }
     }
 }

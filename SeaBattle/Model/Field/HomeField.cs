@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model.Field
 {
-    class HomeField : BaseField, IHomeField
+    public class HomeField : BaseField, IHomeField
     {
         public HomeField() : base() { }
 

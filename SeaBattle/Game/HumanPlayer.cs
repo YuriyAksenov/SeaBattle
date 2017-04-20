@@ -116,7 +116,7 @@ namespace SeaBattle.Game
                 UI.Message("Введите направление: 1 - по горизонтали; 2 - по вертикали");
                 shipDirection = ((Convert.ToInt32(UI.ReadLine().First().ToString()) == 1) ? Direction.Horizontal : Direction.Vertical);
 
-                UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру");
+                UI.Message("Введите координату начальной клетке: сначала букву, через пробел цифру '1 A'");
                 string[] startCellLineFromConsole = UI.ReadLine().Trim().Split(' ');
                 horizontalCoordinateStartCell = (Convert.ToInt32(startCellLineFromConsole.First().ToString()) - 1);
 
@@ -172,6 +172,8 @@ namespace SeaBattle.Game
             }
             return false;
         }
+
+       
 
         public void PrintHomeField()
         {

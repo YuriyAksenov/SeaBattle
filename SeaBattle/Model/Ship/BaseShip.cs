@@ -16,15 +16,13 @@ namespace SeaBattle.Model.Ship
         public Direction Direction { get; private set; }
         public int Length { get; private set; }
         public ShipType ShipType { get; }
-        public bool IsDefeted { get; private set; }
-        public bool[] Cells
-        {
-            get { return Cells; }
-            set
+        public bool IsDefeted {
+            get
             {
-                if (this.Cells.Count(x => x) == Cells.Length) { this.IsDefeted = true; } else { this.IsDefeted = false; }
+                return Length <= CountDefetedUnits;
             }
         }
+        public int CountDefetedUnits { get; set; } = 0;
 
         public BaseShip() : this(Direction.Horizontal, 0)
         {
