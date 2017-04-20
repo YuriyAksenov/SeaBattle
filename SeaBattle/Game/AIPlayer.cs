@@ -15,56 +15,41 @@ namespace SeaBattle.Model.Game
         public void SetAllShips()
         {
 
-
-            int[,] patternField = new int[10,10]
+            HomeField.SetPatternField();
+           /* if (!IsShipSettedAndIterationsNotOverflow(ShipType.Four))
             {
-                { 2, 2, 0, 3, 0, 0, 4, 4, 4, 4},
-                { 0, 0, 0, 3, 0, 0, 0, 0, 0, 0},
-                { 0, 0, 0, 3, 0, 0, 0, 0, 0, 2},
-                { 0, 5, 0, 0, 0, 0, 0, 0, 0, 2},
-                { 0, 5, 0, 0, 0, 0, 0, 0, 0, 0},
-                { 0, 5, 0, 0, 0, 0, 0, 1, 0, 0},
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                { 0, 0, 0, 1, 0, 1, 0, 0, 2, 0},
-                { 1, 0, 0, 0, 0, 0, 0, 0, 2, 0},
-            };
-
-            HomeField.SetPatternField(patternField);
-            //if(!IsShipSettedAndIterationsNotOverflow(ShipType.Four))
-            //{
-            //    SetAllShips();
-            //    return;
-            //}
-            //PrintHomeField();
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    if (!IsShipSettedAndIterationsNotOverflow(ShipType.Three))
-            //    {
-            //        SetAllShips();
-            //        return;
-            //    }
-            //}
-            //PrintHomeField();
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    if (!IsShipSettedAndIterationsNotOverflow(ShipType.Two))
-            //    {
-            //        SetAllShips();
-            //        return;
-            //    }
-            //}
-            //PrintHomeField();
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    if (!IsShipSettedAndIterationsNotOverflow(ShipType.Four))
-            //    {
-            //        SetAllShips();
-            //        return;
-            //    }
-            //}
-            //PrintHomeField();
-
+                SetAllShips();
+                return;
+            }
+            PrintHomeField();
+            for (int i = 0; i < 2; i++)
+            {
+                if (!IsShipSettedAndIterationsNotOverflow(ShipType.Three))
+                {
+                    SetAllShips();
+                    return;
+                }
+            }
+            PrintHomeField();
+            for (int i = 0; i < 3; i++)
+            {
+                if (!IsShipSettedAndIterationsNotOverflow(ShipType.Two))
+                {
+                    SetAllShips();
+                    return;
+                }
+            }
+            PrintHomeField();
+            for (int i = 0; i < 2; i++)
+            {
+                if (!IsShipSettedAndIterationsNotOverflow(ShipType.Four))
+                {
+                    SetAllShips();
+                    return;
+                }
+            }
+            PrintHomeField();
+            */
         }
 
         private bool IsShipSettedAndIterationsNotOverflow(ShipType shipType, int recommendedAmountIterations = 0)

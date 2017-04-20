@@ -6,6 +6,6 @@ namespace SeaBattle.Model.Field
     {
        bool IsPossibleToSetShip(BaseShip baseShip);
        bool SetShip(BaseShip ship);
-       void SetPatternField(int[,] patternField);
+       void SetPatternField(int[,] patternField = null);
     }
 }

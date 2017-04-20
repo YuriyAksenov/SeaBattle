@@ -97,14 +97,30 @@ namespace SeaBattle.Model.Field
             return false;
         }
 
-        public void SetPatternField(int[,] patternField)
+        public void SetPatternField(int[,] patternField = null)
         {
+            if (patternField == null)
+            {
+                patternField = new int[10, 10]
+                {
+                    { 2, 2, 0, 3, 0, 0, 4, 4, 4, 4},
+                    { 0, 0, 0, 3, 0, 0, 0, 0, 0, 0},
+                    { 0, 0, 0, 3, 0, 0, 0, 0, 0, 2},
+                    { 0, 5, 0, 0, 0, 0, 0, 0, 0, 2},
+                    { 0, 5, 0, 0, 0, 0, 0, 0, 0, 0},
+                    { 0, 5, 0, 0, 0, 0, 0, 1, 0, 0},
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    { 0, 0, 0, 1, 0, 1, 0, 0, 2, 0},
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 2, 0},
+                };
+            }
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    Cells[j,i].IsHitted = false;
-                    switch (patternField[i,j])
+                    Cells[j, i].IsHitted = false;
+                    switch (patternField[i, j])
                     {
                         case 1:
                             Cells[j, i].CellType = ShipType.One;
@@ -140,7 +156,7 @@ namespace SeaBattle.Model.Field
 
                 for (int j = 0; j < 10; j++)
                 {
-                    
+
                     sb.Append(" " + ((Cells[j, i].IsHitted ? "1" : "0") + " |"));
                 }
                 sb.AppendLine();

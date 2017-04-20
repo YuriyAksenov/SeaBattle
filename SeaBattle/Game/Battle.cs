@@ -21,34 +21,34 @@ namespace SeaBattle.Share
         public void Run()
         {
 
-            //playerOneHuman = new HumanPlayer();
+            playerTwoAI = new AIPlayer();
+            playerTwoAI.SetAllShips();
 
+            playerOneHuman = new HumanPlayer();
+            playerOneHuman.SetAllShips();
 
-            //playerOneHuman.SetEnemyField(((BaseField)playerTwoAI.HomeField));
-            //playerTwoAI.SetEnemyField(((BaseField)playerOneHuman.HomeField));
-            //PrintHomeField(playerOneHuman.HomeField);
-            //playerOneHuman.SetAllShips();
-            //PrintHomeField(playerOneHuman.HomeField);
-            for (int i = 0; i < 100; i++)
-            {
-                playerTwoAI = new AIPlayer();
-                playerTwoAI.SetAllShips();
-                PrintHomeField(playerTwoAI.HomeField);
-                Console.ReadLine();
-            }
-            
+            Console.WriteLine("Корабли противника");
+            PrintHomeField(playerTwoAI.HomeField);
+            Console.WriteLine("\n\n");
+           
+            Console.WriteLine("Корабли мои");
+            PrintHomeField(playerOneHuman.HomeField);
+
 
         }
 
         public void PrintHomeField(IHomeField homeField)
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             for (int i = 0; i < 10; i++)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 if ((i + 1) == 10) { Console.Write(" " + (i + 1).ToString() + " |"); }
                 else { Console.Write("  " + (i + 1).ToString() + " |"); }
+                Console.ForegroundColor = ConsoleColor.Gray;
 
                 for (int j = 0; j < 10; j++)
                 {
@@ -58,12 +58,13 @@ namespace SeaBattle.Share
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write(homeField.Cells[j, i].ToString());
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     else
                     {
                         if(homeField.Cells[j, i].ToString() == "0")
                         {
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.Write(homeField.Cells[j, i].ToString());
                         }
                         else

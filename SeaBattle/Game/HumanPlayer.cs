@@ -22,49 +22,64 @@ namespace SeaBattle.Game
 
         public void SetAllShips()
         {
-            UI.Message("Заполнить поле автоматически? Y - 'Да, автоматически'; N  - 'Нет, вручную'");
-            string auto = "N";
-            auto = UI.ReadLine();
-            if(auto.Trim() == "Y")
+            UI.ImportantMessage("Начался процесс утсановки кораблей!");
+            UI.Message("Заполнить поле автоматически, вручную или шаблоном? А - 'Автоматически'; Р  - 'Вручную'; Ш - 'Шаблон'");
+            string filled = "Ш";
+            filled = UI.ReadLine();
+            if(String.IsNullOrEmpty(filled)) filled = "Ш";
+
+            if (filled.Trim().First().ToString() == "А")
             {
                 AIPlayer aiplayer = new AIPlayer();
                 aiplayer.SetHomeField((BaseField)HomeField);
                 aiplayer.SetAllShips();
+
+                UI.OKMessage("Корабли утсановлены атвоматически!");
                 return;
             }
+            if (filled.Trim().First().ToString() == "Ш")
+            {
+                HomeField.SetPatternField();
+                UI.OKMessage("Корабли утсановлены шаблоном!");
+                return;
+            }
+
+            UI.OKMessage("Корабли утсанавливаются вручную!");
+
+            PrintHomeField();
             bool isSettedShipFour = false;
             while (!isSettedShipFour) { isSettedShipFour=SetShip(ShipType.Four); }
             PrintHomeField();
 
-            //bool isSettedShipThree = false;
-            //while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
-            //PrintHomeField();
-            //isSettedShipThree = false;
-            //while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
-            //PrintHomeField();
+            bool isSettedShipThree = false;
+            while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
+            PrintHomeField();
+            isSettedShipThree = false;
+            while (!isSettedShipThree) { isSettedShipThree = SetShip(ShipType.Three); }
+            PrintHomeField();
 
-            //bool isSettedShipTwo = false;
-            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
-            //PrintHomeField();
-            //isSettedShipTwo = false;
-            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
-            //PrintHomeField();
-            //isSettedShipTwo = false;
-            //while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
-            //PrintHomeField();
+            bool isSettedShipTwo = false;
+            while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            PrintHomeField();
+            isSettedShipTwo = false;
+            while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            PrintHomeField();
+            isSettedShipTwo = false;
+            while (!isSettedShipTwo) { isSettedShipTwo = SetShip(ShipType.Two); }
+            PrintHomeField();
 
-            //bool isSettedShipOne = false;
-            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
-            //PrintHomeField();
-            //isSettedShipOne = false;
-            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
-            //PrintHomeField();
-            //isSettedShipOne = false;
-            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
-            //PrintHomeField();
-            //isSettedShipOne = false;
-            //while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
-            //PrintHomeField();
+            bool isSettedShipOne = false;
+            while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            PrintHomeField();
+            isSettedShipOne = false;
+            while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            PrintHomeField();
+            isSettedShipOne = false;
+            while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            PrintHomeField();
+            isSettedShipOne = false;
+            while (!isSettedShipOne) { isSettedShipOne = SetShip(ShipType.One); }
+            PrintHomeField();
 
         }
 
@@ -162,12 +177,14 @@ namespace SeaBattle.Game
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             for (int i = 0; i < 10; i++)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 if ((i + 1) == 10) { Console.Write(" " + (i + 1).ToString() + " |"); }
                 else { Console.Write("  " + (i + 1).ToString() + " |"); }
-
+                Console.ForegroundColor = ConsoleColor.Gray;
                 for (int j = 0; j < 10; j++)
                 {
 
@@ -176,7 +193,7 @@ namespace SeaBattle.Game
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write(HomeField.Cells[j, i].ToString());
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     else
                     {
@@ -188,14 +205,14 @@ namespace SeaBattle.Game
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.Write(HomeField.Cells[j, i].ToString());
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Gray;
                         }
                     }
                     Console.Write(" |");
                 }
                 Console.WriteLine();
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
     }
