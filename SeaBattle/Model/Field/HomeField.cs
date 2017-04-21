@@ -1,15 +1,13 @@
 ﻿using SeaBattle.Model.Ship;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SeaBattle.Model.Field
 {
-    public class HomeField : BaseField, IHomeField
+    /// <summary>
+    /// Provides the instance of base field class with IHomrField interface.
+    /// </summary>
+    public partial class BaseField : IHomeField
     {
-        public HomeField() : base() { }
 
         /// <summary>
         /// Gets a value indicating whether setting the ship in cell is possible.
@@ -97,6 +95,10 @@ namespace SeaBattle.Model.Field
             return false;
         }
 
+        /// <summary>
+        /// Sets the specified patterned field that is transmitted into method or determined in the method.
+        /// </summary>
+        /// <param name="patternField"></param>
         public void SetPatternField(int[,] patternField = null)
         {
             if (patternField == null)
@@ -143,7 +145,11 @@ namespace SeaBattle.Model.Field
             }
         }
 
-        public override string PrintField()
+        /// <summary>
+        /// Returns a string representations as home field view of this field;
+        /// </summary>
+        /// <returns>string</returns>
+        public string PrintHomeField()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");

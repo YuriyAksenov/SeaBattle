@@ -1,17 +1,22 @@
-﻿using SeaBattle.Model;
-using SeaBattle.Model.Player;
+﻿using SeaBattle.Model.Player;
 using SeaBattle.Model.Ship;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeaBattle.Model.Game
 {
+    /// <summary>
+    /// Provides the instance of the AI player class.
+    /// </summary>
     public class AIPlayer : BasePlayer
     {
-        
+        /// <summary>
+        /// Initializes the instance of the human player class.
+        /// </summary>
+        public AIPlayer() : base() { }
+
+        /// <summary>
+        /// Sets all ships on the field.
+        /// </summary>
         public void SetAllShips()
         {
 
@@ -52,6 +57,12 @@ namespace SeaBattle.Model.Game
             */
         }
 
+        /// <summary>
+        /// Returns a value of the indicating whether determine ship is setted and amount of iterations are limited and not overflow.
+        /// </summary>
+        /// <param name="shipType"></param>
+        /// <param name="recommendedAmountIterations"></param>
+        /// <returns>bool</returns>
         private bool IsShipSettedAndIterationsNotOverflow(ShipType shipType, int recommendedAmountIterations = 0)
         {
             int maxIterations = 0;
@@ -135,6 +146,11 @@ namespace SeaBattle.Model.Game
             return true;
         }
 
+        /// <summary>
+        /// Returns a value of indicating whether the AI set the ship.
+        /// </summary>
+        /// <param name="shipType"></param>
+        /// <returns>bool</returns>
         private bool SetShip(ShipType shipType)
         {
             try
@@ -161,7 +177,6 @@ namespace SeaBattle.Model.Game
                         break;
                 }
                 var t = (new Random().Next(2));
-                //Console.WriteLine(t);
                 shipDirection = ((t == 1) ? Direction.Horizontal : Direction.Vertical);
 
                 horizontalCoordinateStartCell = new Random().Next(10);
@@ -183,45 +198,6 @@ namespace SeaBattle.Model.Game
             }
             return false;
         }
-
-        public void PrintHomeField()
-        {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");
-
-            for (int i = 0; i < 10; i++)
-            {
-                if ((i + 1) == 10) { Console.Write(" " + (i + 1).ToString() + " |"); }
-                else { Console.Write("  " + (i + 1).ToString() + " |"); }
-
-                for (int j = 0; j < 10; j++)
-                {
-
-                    Console.Write(" ");
-                    if (HomeField.Cells[j, i].IsHitted)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(HomeField.Cells[j, i].ToString());
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else
-                    {
-                        if (HomeField.Cells[j, i].ToString() == "0")
-                        {
-                            Console.Write(HomeField.Cells[j, i].ToString());
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.Write(HomeField.Cells[j, i].ToString());
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
-                    }
-                    Console.Write(" |");
-                }
-                Console.WriteLine();
-            }
-            Console.ForegroundColor = ConsoleColor.Cyan;
-        }
+        
     }
 }

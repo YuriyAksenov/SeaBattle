@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SeaBattle.Model
+﻿namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Provides base class for cell of the field.
+    /// </summary>
     public class Cell
     {
+        /// <summary>
+        /// Initializes a new instance of the Cell class.
+        /// </summary>
         public Cell() { }
 
+        /// <summary>
+        /// Gets a value indicating whether that tell is empty.
+        /// </summary>
         public bool IsEmpty
         {
             get
@@ -17,9 +20,21 @@ namespace SeaBattle.Model
                 return CellType == ShipType.Empty ? true : false;
             }
         }
-        public bool IsHitted { get; set; } = false;
-        public ShipType CellType { get; set; } = ShipType.Empty;
 
+        /// <summary>
+        /// Gets ans Sets a value indicating whether that tell is hitted.
+        /// </summary>
+        public bool IsHitted { get; set; } = false;
+
+        /// <summary>
+        /// Gets and Sets a value indicating type of the cell.
+        /// </summary>
+        public ShipType CellType { get; set; } = ShipType.Empty;
+        
+        /// <summary>
+        /// Returns a string that represents the current type of Cell.
+        /// </summary>
+        /// <returns>string</returns>
         public override string ToString()
         {
             switch (CellType)

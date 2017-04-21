@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace SeaBattle.Model.Field
 {
-    public class EnemyField : BaseField, IEnemyField
+    /// <summary>
+    /// Provides the instance of base field class with IEnemyField interface.
+    /// </summary>
+    public partial class  BaseField : IEnemyField
     {
-        public EnemyField() : base() { }
 
         /// <summary>
         /// Gets a value indicating whether hitting the cell is successful.
@@ -26,7 +24,11 @@ namespace SeaBattle.Model.Field
             return false;
         }
 
-        public override string PrintField()
+        /// <summary>
+        /// Returns a string representations in enemy way view of this field.
+        /// </summary>
+        /// <returns>string</returns>
+        public string PrintEnemyField()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("    |_А_|_Б_|_В_|_Г_|_Д_|_Е_|_Ж_|_З_|_И_|_К_|");

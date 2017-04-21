@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace SeaBattle.Model.Ship
 {
     /// <summary>
-    /// Provides the instance of main unit
+    /// Provides the instance of Base Ship.
     /// </summary>
     public class BaseShip
     {
@@ -24,6 +20,9 @@ namespace SeaBattle.Model.Ship
         }
         public int CountDefetedUnits { get; set; } = 0;
 
+        /// <summary>
+        /// Initializes a new instance of the BaseShip class.
+        /// </summary>
         public BaseShip() : this(Direction.Horizontal, 0)
         {
         }
@@ -59,6 +58,16 @@ namespace SeaBattle.Model.Ship
             this.Length = shipLength;
         }
 
+        /// <summary>
+        /// Sets the start soordinates of the ship
+        /// </summary>
+        /// <param name="horizontalCoordinateStartCell"></param>
+        /// <param name="verticalCoordinateStartCell"></param>
+        public void SetCoordinatesStartCell(int horizontalCoordinateStartCell, int verticalCoordinateStartCell)
+        {
+            this.HorizontalCoordinateStartCell = horizontalCoordinateStartCell;
+            this.VerticalCoordinateStartCell = verticalCoordinateStartCell;
+        }
 
         public void SetDirection(Direction direction)
         {
@@ -70,12 +79,11 @@ namespace SeaBattle.Model.Ship
             this.Length = length;
         }
 
-        public void SetCoordinatesStartCell(int horizontalCoordinateStartCell, int verticalCoordinateStartCell)
-        {
-            this.HorizontalCoordinateStartCell = horizontalCoordinateStartCell;
-            this.VerticalCoordinateStartCell = verticalCoordinateStartCell;
-        }
 
+        /// <summary>
+        /// Returns a string that represents the current type of BaseShip.
+        /// </summary>
+        /// <returns>string</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -85,6 +93,9 @@ namespace SeaBattle.Model.Ship
         }
     }
 
+    /// <summary>
+    /// Provides enumeration of the ship direction.
+    /// </summary>
     public enum Direction : byte
     {
         Horizontal = 0,

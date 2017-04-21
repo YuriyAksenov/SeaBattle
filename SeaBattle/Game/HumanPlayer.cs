@@ -3,12 +3,8 @@ using SeaBattle.Model.Field;
 using SeaBattle.Model.Game;
 using SeaBattle.Model.Player;
 using SeaBattle.Model.Ship;
-using SeaBattle.Share;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 using UI = SeaBattle.Share.UserInteraction;
@@ -16,10 +12,19 @@ using UI = SeaBattle.Share.UserInteraction;
 
 namespace SeaBattle.Game
 {
+    /// <summary>
+    /// Provides the instance of the human player class.
+    /// </summary>
     class HumanPlayer : BasePlayer
     {
+        /// <summary>
+        /// Initializes the instance of the human player class.
+        /// </summary>
         public HumanPlayer() : base() { }
 
+        /// <summary>
+        /// Sets all ships on the field.
+        /// </summary>
         public void SetAllShips()
         {
             UI.ImportantMessage("Начался процесс утсановки кораблей!");
@@ -83,6 +88,11 @@ namespace SeaBattle.Game
 
         }
 
+        /// <summary>
+        /// Returns a value of indicating whether the AI set the ship.
+        /// </summary>
+        /// <param name="shipType"></param>
+        /// <returns>bool</returns>
         private bool SetShip(ShipType shipType)
         {
             try
@@ -173,8 +183,9 @@ namespace SeaBattle.Game
             return false;
         }
 
-       
-
+        /// <summary>
+        /// Prints a field in a home way view of the player.
+        /// </summary>
         public void PrintHomeField()
         {
             Console.ForegroundColor = ConsoleColor.White;

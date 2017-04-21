@@ -1,39 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SeaBattle.Model.Field;
 using SeaBattle.Model.Ship;
 
 namespace SeaBattle.Model.Player
 {
+    /// <summary>
+    /// Provides the instance of Base Player class.
+    /// </summary>
     public class BasePlayer
     {
+        /// <summary>
+        /// Gets the instance if the home field of this player.
+        /// </summary>
         public IHomeField HomeField { get; private set; }
-        public IEnemyField EnemyField { get; set; }
+
+        /// <summary>
+        /// Gets the instance if the enemy field of this player.
+        /// </summary>
+        public IEnemyField EnemyField { get; private set; }
+
+        /// <summary>
+        /// Gets and Sets the list of the ships of this player.
+        /// </summary>
         public List<BaseShip> Ships { get; set; }
 
+        /// <summary>
+        /// Initializes the instance of base player class.
+        /// </summary>
         public BasePlayer()
         {
-            HomeField = new HomeField();
+            HomeField = new BaseField();
             Ships = new List<BaseShip>();
         }
 
-        public void SetEnemyField(BaseField enemyField)
+        /// <summary>
+        /// Sets the Enemy Field, which needed for working of some methods.
+        /// </summary>
+        /// <param name="enemyField"></param>
+        public void SetEnemyField(IBaseField enemyField)
         {
-            this.EnemyField = enemyField as EnemyField;
-            if (EnemyField == null)
-            {
-                throw new Exception("Неправильное приведение типов");
-            }
+            this.EnemyField = (IEnemyField)enemyField;
         }
 
-        public void SetHomeField(BaseField homeField)
+        /// <summary>
+        /// Sets the Home field.
+        /// </summary>
+        /// <param name="homeField"></param>
+        public void SetHomeField(IBaseField homeField)
         {
-            this.HomeField = homeField as HomeField;
+            this.HomeField = (IHomeField)homeField;
         }
 
+        /// <summary>
+        /// Returns a value of indicating wheter all ships are hitted.
+        /// </summary>
+        /// <returns>bool</returns>
         public bool IsAllShipsHitted()
         {
             return Ships.Any(x => !x.IsDefeted);
@@ -60,6 +83,11 @@ namespace SeaBattle.Model.Player
             return false;
         }
 
+        /// <summary>
+        /// Mark the damaged unit of determined ships. 
+        /// </summary>
+        /// <param name="shootedHorizontalCell"></param>
+        /// <param name="shootedVerticalCell"></param>
         private void MarkDamagedUnitShip(int shootedHorizontalCell, int shootedVerticalCell)
         {
             for (int i = 0; i < Ships.Count; i++)

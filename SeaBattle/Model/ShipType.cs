@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SeaBattle.Model
+﻿namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Provides the enumeration of the ship type.
+    /// </summary>
     public enum ShipType : byte
     {
         Empty = 0,

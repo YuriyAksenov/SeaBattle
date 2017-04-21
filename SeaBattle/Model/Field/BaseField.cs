@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace SeaBattle.Model.Field
 {
-    public abstract class BaseField : IBaseField
+    /// <summary>
+    /// Provides the instance of base field class with IBaseField interface.
+    /// </summary>
+    public partial class BaseField : IBaseField
     {
+        /// <summary>
+        /// Gets and sets the array of the field cells.
+        /// </summary>
         public Cell[,] Cells { get; set; }
 
+        /// <summary>
+        /// Initialzes the instance of the base field class.
+        /// </summary>
         public BaseField()
         {
             Cells = new Cell[10, 10];
@@ -24,6 +29,9 @@ namespace SeaBattle.Model.Field
             }
         }
 
+        /// <summary>
+        /// Clears the cells of the instance field. Makes them empty type and unhitted.
+        /// </summary>
         public void ClearField()
         {
             for (int i = 0; i < Cells.GetLength(1); i++)
@@ -36,9 +44,11 @@ namespace SeaBattle.Model.Field
             }
         }
 
-        public abstract string PrintField();
-
-        public override string ToString()
+        /// <summary>
+        /// Returns a string representations in base way view of this field.
+        /// </summary>
+        /// <returns>string</returns>
+        public string PrintField()
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 10; i++)

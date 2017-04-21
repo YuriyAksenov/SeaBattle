@@ -1,23 +1,21 @@
-﻿using SeaBattle.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SeaBattle.Model;
-using SeaBattle.Model.Player;
+﻿using System;
 using SeaBattle.Model.Field;
-using SeaBattle.Model.Ship;
 using SeaBattle.Game;
 using SeaBattle.Model.Game;
 
 namespace SeaBattle.Share
 {
-    class Battle
+    /// <summary>
+    /// Provides the instance of the battle class.
+    /// </summary>
+    public class Battle
     {
-        HumanPlayer playerOneHuman;
-        AIPlayer playerTwoAI;
+        private HumanPlayer playerOneHuman;
+        private AIPlayer playerTwoAI;
 
+        /// <summary>
+        /// Run all games chain.
+        /// </summary>
         public void Run()
         {
 
@@ -27,19 +25,15 @@ namespace SeaBattle.Share
             playerOneHuman = new HumanPlayer();
             playerOneHuman.SetAllShips();
 
-            playerTwoAI.SetEnemyField((BaseField)playerOneHuman.HomeField);
-            playerOneHuman.SetEnemyField((BaseField)playerTwoAI.HomeField);
+            playerTwoAI.SetEnemyField(playerOneHuman.HomeField);
+            playerOneHuman.SetEnemyField(playerTwoAI.HomeField);
 
-            playerTwoAI.EnemyField = (BaseField)playerOneHuman.HomeField as EnemyField;
-            playerOneHuman.EnemyField = (BaseField)playerTwoAI.HomeField as EnemyField;
-
-           
 
             Console.WriteLine("Корабли противника");
             PrintHomeField(playerTwoAI.HomeField);
             Console.WriteLine("\n\n");
            
-            Console.WriteLine("Корабли мои");
+            Console.WriteLine("Корабли ВАши");
             PrintHomeField(playerOneHuman.HomeField);
 
             int turnShooting = 1;
@@ -99,6 +93,9 @@ namespace SeaBattle.Share
 
         }
 
+        /// <summary>
+        /// Prints a field in a home way view.
+        /// </summary>
         public void PrintHomeField(IHomeField homeField)
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -143,6 +140,9 @@ namespace SeaBattle.Share
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
+        /// <summary>
+        /// Prints a field in a home way view.
+        /// </summary>
         public void PrintEnemyField(IEnemyField enemyFiled)
         {
             Console.ForegroundColor = ConsoleColor.White;
